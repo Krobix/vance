@@ -17,3 +17,6 @@ Right after the Header Checksum there is 0x00 and then there is a single byte re
 0xF7 0x00 0xBB separates each data key.
 
 0xBF separates the data key from its value.
+
+
+an example is provided.
