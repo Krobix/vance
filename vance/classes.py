@@ -51,6 +51,7 @@ class VanceFileData:
 		if not self.encoded:
 			self.encodeMetaTags()
 			self.encodeData()
+			self.encoded = True
 		else:
 			self.__init__(self.metatags, self.data, self.version)
 			self.encode()
