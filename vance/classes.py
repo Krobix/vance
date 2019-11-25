@@ -64,6 +64,7 @@ class VanceFileData:
 			name = self.metatags["file-name"]
 		self.metatags["file-name"] = name
 		with fp:
+			self.encode()
 			fp.write(self.bcontent)
 			
 	def __str__(self):
