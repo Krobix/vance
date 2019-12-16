@@ -1,27 +1,3 @@
-'''
-MIT License
-
-Copyright (c) 2019 Krobix
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-'''
-
 from traceback import format_exc
 import logging
 from .classes import *
@@ -29,9 +5,9 @@ import warnings
 import sys
 
 
-VERSION_NUMBER = "b1.0"
+VERSION_NUMBER = "b1.1"
 
-DO_LOGGING = True
+DO_LOGGING = False
 
 DEFAULT_META_TAGS = { #Use these if you wish to change metatags
 	"pyonly": False,
@@ -40,16 +16,17 @@ DEFAULT_META_TAGS = { #Use these if you wish to change metatags
 }
 
 ###Sets up logging
+loghandler = logging.FileHandler("vance.log")
+loghandler.setLevel(logging.DEBUG)
+logfmt = logging.Formatter(fmt="%(asctime)s: %(levelname)s - %(message)s \n")
+loghandler.setFormatter(logfmt)
+logger = logging.getLogger(__name__)
+logger.addHandler(loghandler)
+
 if DO_LOGGING:
-	loghandler = logging.FileHandler("vance.log")
-	loghandler.setLevel(logging.DEBUG)
-	logfmt = logging.Formatter(fmt="%(asctime)s: %(levelname)s - %(message)s \n")
-	loghandler.setFormatter(logfmt)
-	logger = logging.getLogger(__name__)
 	logger.setLevel(logging.DEBUG)
-	logger.addHandler(loghandler)
-###aaaaaaaaaaaaaaa
-	
+else:
+	logger.setLevel(logging.CRITICAL)	
 
 def createVanceData(metatags=DEFAULT_META_TAGS, data={}):
 	"""Function that returns a VanceFileData object. metatags should normally be left blank and data should 	
